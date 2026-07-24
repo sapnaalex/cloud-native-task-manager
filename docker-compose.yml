@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task-manager-api
+    restart: always
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: nginx:alpine
+    container_name: task-manager-proxy
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
