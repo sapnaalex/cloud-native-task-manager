@@ -11,6 +11,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Root Welcome Route
+app.get('/', (_req, res) => {
+  res.send('🚀 Cloud-Native Task Manager API is running live on Render!');
+});
+
 // API Routes
 app.use('/api/tasks', taskRoutes);
 
